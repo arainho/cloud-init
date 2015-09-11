@@ -1,0 +1,28 @@
+#cloud-config
+hostname: xmpp
+fqdn: xmpp.vm.example.com
+manage_etc_hosts: true
+timezone: Europe/Lisbon
+
+apt_update: true
+apt_upgrade: true
+packages:
+  - openjdk-7-jre
+
+runcmd:
+  - wget "http://www.igniterealtime.org/downloadServlet?filename=openfire/openfire_3.10.2_all.deb" -O /tmp/openfire_3.10.2_all.deb
+  - dpkg -i /tmp/openfire_3.10.2_all.deb
+
+ssh_authorized_keys:
+  - ssh-rsa AAA[...] user1@example.com
+
+ca-certs:
+  trusted:
+  - |
+   -----BEGIN CERTIFICATE-----
+   your_CA_cert
+   -----END CERTIFICATE-----
+
+# Print message at the end of cloud-init job
+final_message: "Openfire Server is finally up, after $UPTIME seconds"
+
