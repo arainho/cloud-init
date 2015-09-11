@@ -1,0 +1,35 @@
+#cloud-config
+hostname: mail
+fqdn: mail.vm.example.com
+manage_etc_hosts: true
+timezone: Europe/Lisbon
+
+apt_update: true
+apt_upgrade: true
+packages:
+  - postfix
+  - dovecot-common
+  - dovecot-imapd
+  - mailman
+  - sasl2-bin
+  - libsasl2-modules
+  - spamassassin
+  - spamc
+  - apache2
+
+runcmd:
+  - touch /root/mail_is_alive.txt 
+
+ssh_authorized_keys:
+  - ssh-rsa AAA[...] user1@example.com
+
+ca-certs:
+  trusted:
+  - |
+   -----BEGIN CERTIFICATE-----
+   your_CA_cert
+   -----END CERTIFICATE-----
+
+# Print message at the end of cloud-init job
+final_message: "MAIL Server is finally up, after $UPTIME seconds"
+
