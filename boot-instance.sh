@@ -2,7 +2,7 @@
 
 IMAGE_NAME="ubuntu-14.04-x86_64"                # your image name
 FLAVOR_NAME="mem1024.disk25G.cpu1"              # your flavor name
-KEY_NAME="arainho-terrance"                     # your key name
+KEY_NAME="your-key"                             # your key name
 ZONE="zone1"                                    # zone name
 USER_DATA_NAME="openfire-instance.txt"          # your user-data file, inside user-data folder
 INSTANCE_NAME="openfire"                        # the instance name
