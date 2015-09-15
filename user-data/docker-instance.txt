@@ -1,0 +1,36 @@
+#cloud-config
+hostname: sample-docker
+fqdn: sample-docker.vm.example.com
+manage_etc_hosts: true
+timezone: Europe/Lisbon
+
+apt_update: true
+apt_upgrade: true
+packages:
+  - wget
+  - rsync
+  - ssh
+
+runcmd:
+  - apt-get -y install software-properties-common
+  - apt-add-repository ppa:ansible/ansible
+  - apt-get update
+  - apt-get -y install ansible
+  - wget https://raw.githubusercontent.com/arainho/cloud-init/master/ansible/ansible_hosts -O ansible_hosts
+  - wget https://raw.githubusercontent.com/arainho/cloud-init/master/ansible/ansible-docker.yml -O ansible-docker.yml
+  - ansible-galaxy install angstwad.docker_ubuntu
+  - ansible-playbook ansible-docker.yml
+
+ssh_authorized_keys:
+  - ssh-rsa AAA[...] user1@example.com
+
+ca-certs:
+  trusted:
+  - |
+   -----BEGIN CERTIFICATE-----
+   your_CA_cert
+   -----END CERTIFICATE-----
+
+# Print message at the end of cloud-init job
+final_message: "Docker Server is finally up, after $UPTIME seconds"
+
