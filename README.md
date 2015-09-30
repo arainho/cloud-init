@@ -6,5 +6,4 @@ Providing User Data to Instances
 $ nova boot --image myUbuntuImage --flavor myFlavorOne --user-data mydata.file
 ```
 
-some extra info
-https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/4/html/End_User_Guide/user-data.html
+some extra info on [redhat openstack docs] (https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/4/html/End_User_Guide/user-data.html)
