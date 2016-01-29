@@ -23,6 +23,12 @@ echo -n "checking image-id ...  "
 IMAGE_ID=$(glance image-list | grep "$IMAGE_NAME " | awk '{print $2}')
 echo "image-id: $IMAGE_ID"
 
+if [ "${IMAGE_ID}" == "" ]
+then    
+    echo "IMAGE_ID is empty!"
+    exit
+fi
+
 # get flavor id
 echo -n "checking flavor-id ...  "
 FLAVOR_ID=$(nova flavor-list | grep "$FLAVOR_NAME" | awk '{print $2}')
