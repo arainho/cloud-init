@@ -1,0 +1,40 @@
+#cloud-config
+hostname: sample-mailman
+fqdn: sample-mailman.vm.example.com
+manage_etc_hosts: true
+timezone: Europe/Lisbon
+
+apt_update: true
+apt_upgrade: true
+packages:
+  - wget
+  - rsync
+  - ssh
+  - git
+  - python-pip
+  - python-netaddr
+
+runcmd:
+  - apt-get -y install software-properties-common
+  - apt-add-repository ppa:ansible/ansible
+  - apt-get update
+  - apt-get -y install ansible
+  - wget https://raw.githubusercontent.com/arainho/cloud-init/master/ansible/ansible_hosts -O ansible_hosts
+  - wget https://raw.githubusercontent.com/arainho/cloud-init/master/ansible/ansible-mailman.yml -O ansible-mailman.yml
+  - pip install netaddr
+  - ansible-galaxy install debops.mailman
+  - ansible-playbook -i ansible_hosts ansible-mailman.yml
+
+ssh_authorized_keys:
+  - ssh-rsa AAA[...] user1@example.com
+
+ca-certs:
+  trusted:
+  - |
+   -----BEGIN CERTIFICATE-----
+   your_CA_cert
+   -----END CERTIFICATE-----
+
+# Print message at the end of cloud-init job
+final_message: "Mailman Server is finally up, after $UPTIME seconds"
+
