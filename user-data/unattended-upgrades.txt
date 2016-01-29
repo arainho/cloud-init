@@ -18,7 +18,7 @@ runcmd:
   - wget https://raw.githubusercontent.com/arainho/cloud-init/master/ansible/ansible_hosts -O ansible_hosts
   - wget https://raw.githubusercontent.com/arainho/cloud-init/master/ansible/unattended-upgrades.yml -O unattended-upgrades.yml 
   - ansible-galaxy install jnv.unattended-upgrades
-  - ansible-playbook unattended-upgrades.yml
+  - ansible-playbook -i ansible_hosts unattended-upgrades.yml
 
 ssh_authorized_keys:
   - ssh-rsa AAA[...] user1@example.com
