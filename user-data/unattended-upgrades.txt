@@ -8,6 +8,7 @@ apt_update: true
 apt_upgrade: true
 packages:
   - unattended-upgrades
+  - apt-listchanges
 
 runcmd:
   - apt-get -y install software-properties-common
